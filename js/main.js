@@ -3,16 +3,8 @@
   //variables
   const model = document.querySelector("#model");
   const hotspots = document.querySelectorAll(".Hotspot");
-
-  // function getData() {
-  //   fetch("https://swiftpixel.com/earbud/api/infoboxes")
-  //   .then(response => response.json())
-  //   .then(material => {
-  //     console.log(material);
-  //   })
-  //   .catch(error => console.error(error)); //catch and report any errors
-  // }
-  // getData();
+  const materialTemplate = document.querySelector("#material-template");
+  const materialList = document.querySelector("#material-list");
 
   //This information needs to be removed then pulled with an AJAX Call using the Fetch API
   //this is the api url https://swiftpixel.com/earbud/api/infoboxes"
@@ -47,6 +39,8 @@
 
   //functions
   function modelLoaded() {
+    let spinner = document.querySelector("#spinner")
+    spinner.style.display = "none";
     hotspots.forEach(hotspot => {
       hotspot.style.display = "block";
     });
@@ -77,7 +71,7 @@
           selected.appendChild(textElement);
         })
       })
-      .catch(error => console.error(error)); //catch and report any errors
+      .catch(error => window.alert("Failed to load info")); //catch and report any errors
     }
     getData();
   }
@@ -85,14 +79,25 @@
 
   function loadMaterials() {
     let ul = document.querySelector("#material-list")
-    
-    function getMaterial() {
-
-    } 
-    getMaterial();
+    materialListData.forEach (material => {
+      const clone = materialTemplate.content.cloneNode(true);
+      const materialHeading = clone.querySelector(".material-heading"); 
+      materialHeading.textContent = material.heading;
+      const materialDescription = clone.querySelector(".material-description")
+      materialDescription.textContent = material.description;
+      materialList.appendChild(clone);
+    })
+    // function getMaterials() {
+    //   fetch("https://swiftpixel.com/earbud/api/materials")
+    //   .then(response => response.json())
+    //   .then(material => {
+    //     console.log(material);
+    //   })
+    //   .catch(error => console.error(error)); //catch and report any errors
+    // }
+    // getMaterials();
   }
   loadMaterials();
-
 
   function showInfo() {
     let selected = document.querySelector(`#${this.slot}`);
