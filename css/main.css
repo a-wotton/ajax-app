@@ -149,4 +149,11 @@ model-viewer[ar-status=session-started] > #ar-prompt {
 
 model-viewer > #ar-prompt > img {
   animation: circle 4s linear infinite;
-}/*# sourceMappingURL=main.css.map */
+}
+
+#spinner {
+  z-index: 100;
+  position: absolute;
+}
+
+/*# sourceMappingURL=main.css.map */
